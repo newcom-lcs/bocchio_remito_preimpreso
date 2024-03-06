@@ -9,6 +9,7 @@
     'data':[
        'views/remito_preimpreso_report.xml',
        'views/remito_preimpreso_report_template.xml',
+       # 'views/remito_preimpreso_paper.xml',
     ],
     'auto_install': False,
     'installable' : True,

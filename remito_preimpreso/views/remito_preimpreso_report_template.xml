@@ -5,51 +5,65 @@
 	    <t t-foreach="docs" t-as="o">
 	  	<div t-attf-class="article o_report_layout_standard" 
 		     t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
-		   <div class="pt-5">
+		   <div class="pt-0">
 	   			<t t-call="web.address_layout"/>
 				<div class="row">
-					<div class="col-3">
-						Cliente
-					</div>
 					<div class="col-8">
 						<p>
-							<span t-esc="o.partner_id.name" ></span>
+                            <span style="position:absolute;top:37mm;left:192mm" t-esc="o.scheduled_date.strftime('%Y-%m-%d')" ></span>
 							<br/>
-							<span t-esc="o.partner_id.street" ></span>
+							<span style="position:absolute;top:79mm;left:45mm" t-esc="o.partner_id.name" ></span>
 							<br/>
-							<span t-esc="o.partner_id.city" ></span>
+							<span style="position:absolute;top:86mm;left:45mm" t-esc="o.partner_id.street" ></span>
 							<br/>
-							<span t-esc="o.partner_id.state_id and o.partner_id.state_id.name or ''" ></span>
+							<span style="position:absolute;top:94mm;left:45mm" t-esc="o.partner_id.city" ></span>
+							<br/>
+                            <span style="position:absolute;top:101mm;left:45mm" t-esc="o.partner_id.l10n_ar_afip_responsibility_type_id.name" ></span>
+							<br/>
+                            <span style="position:absolute;top:109mm;left:68mm" t-esc="o.sale_id.payment_term_id.name" ></span>
+                            <br/>
+                             <span style="text-align: left;position:absolute;top:79mm;left:191mm" t-esc="o.partner_id.id" ></span>
+                            <br/>
+                            <span style="text-align: left;position:absolute;top:86mm;left:191mm" t-esc="o.partner_id.phone" ></span>
+                            <br/>
+                            <span style="text-align: left;position:absolute;top:94mm;left:191mm" t-esc="o.partner_id.mobile" ></span>
+                            <br/>
+							<span style="text-align: left;position:absolute;top:101mm;left:191mm" t-esc="o.partner_id.state_id and o.partner_id.vat or ''" ></span>
+                            <br/>
 						</p>
 					</div>
 				</div>
 				<br/>
-				<h2><span t-esc="o.name"></span></h2>
-				<br/>
-				<table class="table table-sm" style="font-size: 12px;">
-					<thead>
-						<tr>
-							<th>Producto</th>
-							<th>Nro.de Serie</th>
-							<th>Cantidad</th>
-							<th>Unidad de Medida</th>
-						</tr>
-					</thead>
-					<tbody>
+               
+				<table class="table table-sm" style="border:0px solid white ;font-size: 12px; position:absolute; top:140mm">
+					<tbody style="border:0px solid white">
 						<t t-set="move_lines" t-value="o.move_line_ids"/>
-						<tr t-foreach="move_lines" t-as="move_line">
-							<td>
-								<span t-field="move_line.product_id"/>
+                        <tr style="border:none;">
+                            <td style="text-align: right;width: 30mm;border:none; padding:1mm">
 							</td>
-							<td>
-								<span t-if="move_line.lot_id" t-field="momve_line.lot_id.name"/>
+                            <td style="text-align: right;width: 15mm;border:none;padding:1mm">
 							</td>
-							<td style="text-align: right">
-								<span t-field="move_line.qty_done"/>
+                            <td style="text-align: left;width: 10mm;border:none;padding:1mm">
 							</td>
-							<td>
-								<span t-field="move_line.product_uom_id.name"/>
+                             <td style="text-align: left;border:none;padding:1mm">
+                                <span t-esc="o.note"></span>                                
+                            </td>    
+                        </tr>
+						<tr t-foreach="move_lines" t-as="move_line" style="border:none;">
+							<td style="text-align: right;border:none; padding:1mm">
+								<span  t-field="move_line.product_id.default_code"/>
 							</td>
+							
+							<td style="text-align: right;border:none;padding:1mm">
+								<span  t-field="move_line.qty_done"/>
+							</td>
+							<td style="text-align: left;border:none;padding:1mm">
+								<span  t-field="move_line.product_uom_id.name"/>
+							</td>                            
+                            <td style="text-align: left;border:none;padding:1mm">
+								<span   t-field="move_line.product_id.name"/>
+							</td>   
+                           
 						</tr>
 					</tbody>
 				</table> 
